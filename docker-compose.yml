@@ -1,0 +1,42 @@
+# docker-compose.yml
+version: '3.8'
+
+services:
+  # Option 1: Combined service (recommended for process monitoring)
+  diablo2:
+    build: .
+    restart: always
+    volumes:
+      - screenshots:/screenshots
+      - memory_dumps:/memory_dumps
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+    ports:
+      - "5901:5901"   # VNC server
+      - "8089:8080"   # Web VNC (optional)
+      - "3000:3000"   # Health check endpoint
+      - "8765:8765"   # MCP server (for Claude Desktop)
+    environment:
+      - DISPLAY=:1
+      - VNC_HOST=localhost
+      - VNC_PORT=5901
+    privileged: true  # Needed for memory access
+    cap_add:
+      - SYS_PTRACE  # Required for memory scanning
+    healthcheck:
+      test: ["CMD", "sh", "-c", "pgrep -f Game.exe && curl -f http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    # Run both game and MCP server in the same container
+    command: >
+      sh -c "
+      echo 'Starting combined Diablo 2 + MCP Server container...';
+      /usr/local/bin/start_diablo2.sh &
+      sleep 15;
+      echo 'Starting MCP Server...';
+      python3 /usr/local/bin/diablo2_mcp_server.py
+      "
+
+volumes:
+  screenshots:
+  memory_dumps:
