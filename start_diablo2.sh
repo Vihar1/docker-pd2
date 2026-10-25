@@ -29,13 +29,13 @@ sleep 2
 echo "VNC server started on port 5901"
 
 # Start memory monitoring service
-python3 /usr/local/bin/diablo2_monitor.py &
-MONITOR_PID=$!
+# python3 /usr/local/bin/diablo2_monitor.py &
+# MONITOR_PID=$!
 
 # Start MCP server for AI integration
-python3 /usr/local/bin/diablo2_mcp_server.py &
-MCP_PID=$!
-echo "MCP server started on port 8765"
+# python3 /usr/local/bin/diablo2_mcp_server.py &
+# MCP_PID=$!
+# echo "MCP server started on port 8765"
 
 # Configure Wine for Project Diablo 2
 cd /root/.wine/drive_c
