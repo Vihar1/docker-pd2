@@ -10,7 +10,7 @@ services:
       - screenshots:/screenshots
       - memory_dumps:/memory_dumps
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
-      - pd2:/game/pd2
+      - ./pd2:/game/pd2
     ports:
       - "5901:5901"   # VNC server
       - "8089:8080"   # Web VNC (optional)
