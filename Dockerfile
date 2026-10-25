@@ -74,11 +74,11 @@ COPY start_diablo2.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/start_diablo2.sh
 
 # Copy monitoring script
-COPY diablo2_monitor.py /usr/local/bin/
-COPY diablo2_mcp_server.py /usr/local/bin/
+# COPY diablo2_monitor.py /usr/local/bin/
+# COPY diablo2_mcp_server.py /usr/local/bin/
 
 # Copy Project Diablo 2 game files (you need to provide these)
-COPY pd2/ /game/pd2/
+# COPY pd2/ /game/pd2/
 
 # Expose ports:
 # 5901 - VNC server for remote desktop access
