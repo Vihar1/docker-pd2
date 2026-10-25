@@ -13,8 +13,8 @@ services:
     ports:
       - "5901:5901"   # VNC server
       - "8089:8080"   # Web VNC (optional)
-      - "3000:3000"   # Health check endpoint
-      - "8765:8765"   # MCP server (for Claude Desktop)
+      # - "3000:3000"   # Health check endpoint
+      # - "8765:8765"   # MCP server (for Claude Desktop)
     environment:
       - DISPLAY=:1
       - VNC_HOST=localhost
